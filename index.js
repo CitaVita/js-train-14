@@ -11,9 +11,17 @@
  */
 function getDateDetails(date) {
   // Перевірка, чи є вхідне значення об'єктом Date,це можно зробити перевіривши чи є date.getTime по типу функція .
+  if (!(date instanceof Date) || isNaN(date.getTime())) {
+    return "Помилка: вхідне значення має бути об'єктом Date";
+  }
   // Якщо date не є об'єктом Date, повертаємо рядок
   // "Помилка: вхідне значення має бути об'єктом Date"
   // Повертаємо об'єкт, що містить деякі деталі про вхідний об'єкт Date.
+  return {
+    year: date.getFullYear(),
+    month: date.getMonth(),
+    day: date.getDate()
+  };
 }
 
 console.log("Завдання: 1 ==============================");
@@ -32,12 +40,23 @@ console.log(getDateDetails(new Date("2023-12-25T00:00:00Z")));
  */
 function setDateDetails(date, isoString) {
   // Перевірка, чи є вхідне значення об'єктом Date,це можно зробити перевіривши чи є date.getTime по типу функція .
-  // Якщо date не є об'єктом Date, повертаємо рядок
+  if (!(date instanceof Date) || isNaN(date.getTime())) {
+    // Якщо date не є об'єктом Date, повертаємо рядок
   // "Помилка: вхідне значення має бути об'єктом Date"
+    return "Помилка: вхідне значення має бути об'єктом Date";
+  }
+  
   // Перевірка, чи є вхідний ISO рядок валідним, отримавши дату з рядка та перевірити чи є результат числом,
+  const parsedDate = new Date(isoString);
+  if(isNaN(parsedDate.getTime())) {
   //  якщо ні виводимо повідомлення "Помилка: недійсний ISO рядок"
+    return "Помилка: недійсний ISO рядок";
+  }
+
   // Встановлюємо дату з ISO рядка в об'єкт Date.
+  date.setTime(parsedDate.getTime());
   // Повертаємо об'єкт Date з встановленою датою.
+  return date;
 }
 
 console.log("Завдання: 2 ==============================");
@@ -55,9 +74,14 @@ console.log(setDateDetails(date, "2023-12-25T00:00:00Z"));
  */
 function dateToUTC(date) {
   // Перевірка, чи є вхідне значення об'єктом Date,це можно зробити перевіривши чи є date.getTime по типу функція .
+  if (!(date instanceof Date) || isNaN(date.getTime())) {
   // Якщо date не є об'єктом Date, повертаємо рядок
   // "Помилка: вхідне значення має бути об'єктом Date"
+  return "Помилка: вхідне значення має бути об'єктом Date";
+  }
+
   // Повертаємо рядок з датою в UTC форматі.
+  return date.toUTCString();
 }
 
 console.log("Завдання: 3 ==============================");
